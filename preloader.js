@@ -18,33 +18,27 @@ const svgImage = document.createElement('img');
 svgImage.id = 'svgImage';
 svgImage.src = 'https://monlak01.github.io/preloaderJs/loaderball.svg';
 svgImage.style.cssText = `
-    max-width: 100%;
-    max-height: 100%;
-    display: none;
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
+    width: 100vw;  // Full viewport width
+    height: 100vh; // Full viewport height
+    object-fit: cover; // Cover the whole viewport without losing aspect ratio
+    position: fixed; // Fixed position to cover the whole screen
+    top: 0;
+    left: 0;
 `;
-svgImage.style.display = 'none';
 
 // Append the elements to the body
+overlay.appendChild(svgImage); // Append the SVG image inside the overlay
 document.body.appendChild(overlay);
-document.body.appendChild(svgImage);
 
-// Function to hide the overlay and display the SVG
+// Function to hide the overlay
 function hideOverlay() {
     overlay.style.display = 'none';
-    svgImage.style.display = 'block';
 }
 
 // Add an event listener to hide the overlay when all external JS files are loaded
 document.addEventListener('DOMContentLoaded', () => {
-    // Replace the following lines with the actual code that loads your external JS files
-    // For demonstration purposes, we'll use a setTimeout to simulate loading external JS files.
-    setTimeout(hideOverlay, 100); // Replace with your actual loading code.
+    setTimeout(hideOverlay, 100); // Simulating external JS file loading
 });
 
-// Fallback: If all external resources are loaded and the DOMContentLoaded event doesn't fire,
-// we'll still hide the overlay when the window's load event is triggered.
+// Fallback: Hide the overlay when the window's load event is triggered
 window.addEventListener('load', hideOverlay);
